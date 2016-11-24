@@ -4,20 +4,17 @@
   padding: 2px;
   width: 90px;
   height: 60px;
-  border: 3px solid #a00;
-  background-color: red;
+  border: 3px solid #60351f;
+  background-color: #60351f;
   color: white;  
 }
-
 #block {
   display: inline-block;
   margin: 30px;
   padding: 2px;
-  border: 3px solid #a00;
+  border: 3px solid #60351f;
 }
-
 #block-row {
   margin: 30px;
   padding: 2px;
-/*   border: 3px solid #a00; */
 }
