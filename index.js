@@ -1,11 +1,9 @@
-var http = require('http');
-var fs = require("fs");
- 
-http.createServer(function(request, response) 
-{
-	fs.readFile("index.html", function(err, data){
-  	response.writeHead(200, {'Content-Type': 'text/html'});
-  	response.write(data);
-  	response.end();
-	});
-}).listen(3000);
+var express = require('express');
+var app = express();
+var path = require('path')
+
+app.use(express.static(__dirname + "/"));
+app.use(express.static(__dirname + "/stylesheets"));
+app.use(express.static(__dirname + "/images"));
+
+app.listen(9488);
