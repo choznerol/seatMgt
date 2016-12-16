@@ -1,20 +1,53 @@
-#row div{
+/* BROWN #66351F */
+
+/* RED #FF3778 */
+/* GREEN #22B14C */
+/* BLUE #00a2e8 */
+/* YELLOW #ffc90e */
+/* GRAY #7f7f7f */
+
+body{
+    background-image: url(../images/body-bg.png);
+}
+.row div{
+  background-image: url(../images/btn-bg.png);
   display: inline-block;
   margin: 5px;
   padding: 2px;
   width: 90px;
   height: 60px;
-  border: 3px solid #60351f;
+  border: 5px solid #60351f;
   background-color: #60351f;
-  color: white;  
 }
-#block {
+.seat {
+    background-image: url(../images/btn-bg.png);
+}
+.block {
   display: inline-block;
-  margin: 30px;
-  padding: 2px;
-  border: 3px solid #60351f;
+  margin-right: 50;
+  margin-bottom: 40;
+  padding: 0px;
 }
-#block-row {
-  margin: 30px;
+.block-row {
+  margin: 0px;
   padding: 2px;
+}
+.wood-button {
+    background-image: url(../images/wood-button-A.png)
+}
+.btn {
+    padding: 0;
+    margin: 10;
+    border: 0;
+    background-color: transparent;
+}
+.label {
+    height: 48;
+}
+.nav-light {
+    height: 35;
+    vertical-align:baseline;
+}
+nav {
+    margin-bottom: 20;
 }
