@@ -51,3 +51,11 @@ body{
 nav {
     margin-bottom: 20;
 }
+
+.nav-items a {
+    margin: 10px
+}
+
+.nav-items span {
+    vertical-align:sub;
+}
