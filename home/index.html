@@ -1,6 +1,9 @@
 <!DOCTYPE html5>
+<html>
 <head>
     <link rel="stylesheet" type="text/css" href="stylesheets/main.css">
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 </head>
 <body>
 
@@ -71,74 +74,74 @@
 
         <div class="block">
             <div class="row">
-                <div id="t1s1">
-                    <span id="t1s1-id">(user_id)</span>
+                <div id="t2s1">
+                    <span id="t2s1-id">(user_id)</span>
                     <img src="images/green_light.png" height="15" align="right">
-                    <span id="t1s1-info">(info)</span>
+                    <span id="t2s1-info">(info)</span>
                 </div>
-                <div id="t1s2">
-                    <span id="t1s2-id">(user_id)</span>
+                <div id="t2s2">
+                    <span id="t2s2-id">(user_id)</span>
                     <img src="images/green_light.png" height="15" align="right">
-                    <span id="t1s2-info">(info)</span>
+                    <span id="t2s2-info">(info)</span>
                 </div>
-                <div id="t1s3">
-                    <span id="t1s3-id">(user_id)</span>
+                <div id="t2s3">
+                    <span id="t2s3-id">(user_id)</span>
                     <img src="images/green_light.png" height="15" align="right">
-                    <span id="t1s3-info">(info)</span>
+                    <span id="t2s3-info">(info)</span>
                 </div>
             </div>
             <div class="row">
-                <div id="t1s4">
-                    <span id="t1s4-id">(user_id)</span>
+                <div id="t2s4">
+                    <span id="t2s4-id">(user_id)</span>
                     <img src="images/green_light.png" height="15" align="right">
-                    <span id="t1s4-info">(info)</span>
+                    <span id="t2s4-info">(info)</span>
                 </div>
-                <div id="t1s5">
-                    <span id="t1s5-id">(user_id)</span>
-                    <img src="images/green_light.png" height="15" align="right">
-                    <span id="t1s5-info">(info)</span>
+                <div id="t2s5">
+                    <span id="t2s5-id">(user_id)</span>
+                    <img id="t2s5-img" src="images/green_light.png" height="15" align="right">
+                    <span id="t2s5-info">(info)</span>
                 </div>
-                <div id="t1s6">
-                    <span id="t1s6-id">(user_id)</span>
+                <div id="t2s6">
+                    <span id="t2s6-id">(user_id)</span>
                     <img src="images/green_light.png" height="15" align="right">
-                    <span id="t1s6-info">(info)</span>
+                    <span id="t2s6-info">(info)</span>
                 </div>
             </div>
         </div>
 
         <div class="block">
             <div class="row">
-                <div id="t1s1">
-                    <span id="t1s1-id">(user_id)</span>
+                <div id="t3s1">
+                    <span id="t3s1-id">(user_id)</span>
                     <img src="images/green_light.png" height="15" align="right">
-                    <span id="t1s1-info">(info)</span>
+                    <span id="t3s1-info">(info)</span>
                 </div>
-                <div id="t1s2">
-                    <span id="t1s2-id">(user_id)</span>
+                <div id="t3s2">
+                    <span id="t3s2-id">(user_id)</span>
                     <img src="images/green_light.png" height="15" align="right">
-                    <span id="t1s2-info">(info)</span>
+                    <span id="t3s2-info">(info)</span>
                 </div>
-                <div id="t1s3">
-                    <span id="t1s3-id">(user_id)</span>
+                <div id="t3s3">
+                    <span id="t3s3-id">(user_id)</span>
                     <img src="images/green_light.png" height="15" align="right">
-                    <span id="t1s3-info">(info)</span>
+                    <span id="t3s3-info">(info)</span>
                 </div>
             </div>
             <div class="row">
-                <div id="t1s4">
-                    <span id="t1s4-id">(user_id)</span>
+                <div id="t3s4">
+                    <span id="t3s4-id">(user_id)</span>
                     <img src="images/green_light.png" height="15" align="right">
-                    <span id="t1s4-info">(info)</span>
+                    <span id="t3s4-info">(info)</span>
                 </div>
-                <div id="t1s5">
-                    <span id="t1s5-id">(user_id)</span>
+                <div id="t3s5">
+                    <span id="t3s5-id">(user_id)</span>
                     <img src="images/green_light.png" height="15" align="right">
-                    <span id="t1s5-info">(info)</span>
+                    <span id="t3s5-info">(info)</span>
                 </div>
-                <div id="t1s6">
-                    <span id="t1s6-id">(user_id)</span>
+                <div id="t3s6">
+                    <span id="t3s6-id">(user_id)</span>
                     <img src="images/green_light.png" height="15" align="right">
-                    <span id="t1s6-info">(info)</span>
+                    <span id="t3s6-info">(info)</span>
                 </div>
             </div>
         </div>
@@ -147,115 +150,147 @@
     <div class="block-row">
         <div class="block">
             <div class="row">
-                <div id="t1s1">
-                    <span id="t1s1-id">(user_id)</span>
+                <div id="t4s1">
+                    <span id="t4s1-id">(user_id)</span>
                     <img src="images/green_light.png" height="15" align="right">
-                    <span id="t1s1-info">(info)</span>
+                    <span id="t4s1-info">(info)</span>
                 </div>
-                <div id="t1s2">
-                    <span id="t1s2-id">(user_id)</span>
+                <div id="t4s2">
+                    <span id="t4s2-id">(user_id)</span>
                     <img src="images/green_light.png" height="15" align="right">
-                    <span id="t1s2-info">(info)</span>
+                    <span id="t4s2-info">(info)</span>
                 </div>
-                <div id="t1s3">
-                    <span id="t1s3-id">(user_id)</span>
+                <div id="t4s3">
+                    <span id="t4s3-id">(user_id)</span>
                     <img src="images/green_light.png" height="15" align="right">
-                    <span id="t1s3-info">(info)</span>
-                </div>
-            </div>
-            <div class="row">
-                <div id="t1s4">
-                    <span id="t1s4-id">(user_id)</span>
-                    <img src="images/green_light.png" height="15" align="right">
-                    <span id="t1s4-info">(info)</span>
-                </div>
-                <div id="t1s5">
-                    <span id="t1s5-id">(user_id)</span>
-                    <img src="images/green_light.png" height="15" align="right">
-                    <span id="t1s5-info">(info)</span>
-                </div>
-                <div id="t1s6">
-                    <span id="t1s6-id">(user_id)</span>
-                    <img src="images/green_light.png" height="15" align="right">
-                    <span id="t1s6-info">(info)</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="block">
-            <div class="row">
-                <div id="t1s1">
-                    <span id="t1s1-id">(user_id)</span>
-                    <img src="images/green_light.png" height="15" align="right">
-                    <span id="t1s1-info">(info)</span>
-                </div>
-                <div id="t1s2">
-                    <span id="t1s2-id">(user_id)</span>
-                    <img src="images/green_light.png" height="15" align="right">
-                    <span id="t1s2-info">(info)</span>
-                </div>
-                <div id="t1s3">
-                    <span id="t1s3-id">(user_id)</span>
-                    <img src="images/green_light.png" height="15" align="right">
-                    <span id="t1s3-info">(info)</span>
+                    <span id="t4s3-info">(info)</span>
                 </div>
             </div>
             <div class="row">
-                <div id="t1s4">
-                    <span id="t1s4-id">(user_id)</span>
+                <div id="t4s4">
+                    <span id="t4s4-id">(user_id)</span>
                     <img src="images/green_light.png" height="15" align="right">
-                    <span id="t1s4-info">(info)</span>
+                    <span id="t4s4-info">(info)</span>
                 </div>
-                <div id="t1s5">
-                    <span id="t1s5-id">(user_id)</span>
+                <div id="t4s5">
+                    <span id="t4s5-id">(user_id)</span>
                     <img src="images/green_light.png" height="15" align="right">
-                    <span id="t1s5-info">(info)</span>
+                    <span id="t4s5-info">(info)</span>
                 </div>
-                <div id="t1s6">
-                    <span id="t1s6-id">(user_id)</span>
+                <div id="t4s6">
+                    <span id="t4s6-id">(user_id)</span>
                     <img src="images/green_light.png" height="15" align="right">
-                    <span id="t1s6-info">(info)</span>
+                    <span id="t4s6-info">(info)</span>
                 </div>
             </div>
         </div>
 
         <div class="block">
             <div class="row">
-                <div id="t1s1">
-                    <span id="t1s1-id">(user_id)</span>
+                <div id="t5s1">
+                    <span id="t5s1-id">(user_id)</span>
                     <img src="images/green_light.png" height="15" align="right">
-                    <span id="t1s1-info">(info)</span>
+                    <span id="t5s1-info">(info)</span>
                 </div>
-                <div id="t1s2">
-                    <span id="t1s2-id">(user_id)</span>
+                <div id="t5s2">
+                    <span id="t5s2-id">(user_id)</span>
                     <img src="images/green_light.png" height="15" align="right">
-                    <span id="t1s2-info">(info)</span>
+                    <span id="t5s2-info">(info)</span>
                 </div>
-                <div id="t1s3">
-                    <span id="t1s3-id">(user_id)</span>
+                <div id="t5s3">
+                    <span id="t5s3-id">(user_id)</span>
                     <img src="images/green_light.png" height="15" align="right">
-                    <span id="t1s3-info">(info)</span>
+                    <span id="t5s3-info">(info)</span>
                 </div>
             </div>
             <div class="row">
-                <div id="t1s4">
-                    <span id="t1s4-id">(user_id)</span>
+                <div id="t5s4">
+                    <span id="t5s4-id">(user_id)</span>
                     <img src="images/green_light.png" height="15" align="right">
-                    <span id="t1s4-info">(info)</span>
+                    <span id="t5s4-info">(info)</span>
                 </div>
-                <div id="t1s5">
-                    <span id="t1s5-id">(user_id)</span>
+                <div id="t5s5">
+                    <span id="t5s5-id">(user_id)</span>
                     <img src="images/green_light.png" height="15" align="right">
-                    <span id="t1s5-info">(info)</span>
+                    <span id="t5s5-info">(info)</span>
                 </div>
-                <div id="t1s6">
-                    <span id="t1s6-id">(user_id)</span>
+                <div id="t5s6">
+                    <span id="t5s6-id">(user_id)</span>
                     <img src="images/green_light.png" height="15" align="right">
-                    <span id="t1s6-info">(info)</span>
+                    <span id="t5s6-info">(info)</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="block">
+            <div class="row">
+                <div id="t6s1">
+                    <span id="t6s1-id">(user_id)</span>
+                    <img src="images/green_light.png" height="15" align="right">
+                    <span id="t6s1-info">(info)</span>
+                </div>
+                <div id="t6s2">
+                    <span id="t6s2-id">(user_id)</span>
+                    <img src="images/green_light.png" height="15" align="right">
+                    <span id="t6s2-info">(info)</span>
+                </div>
+                <div id="t6s3">
+                    <span id="t6s3-id">(user_id)</span>
+                    <img src="images/green_light.png" height="15" align="right">
+                    <span id="t6s3-info">(info)</span>
+                </div>
+            </div>
+            <div class="row">
+                <div id="t6s4">
+                    <span id="t6s4-id">(user_id)</span>
+                    <img src="images/green_light.png" height="15" align="right">
+                    <span id="t6s4-info">(info)</span>
+                </div>
+                <div id="t6s5">
+                    <span id="t6s5-id">(user_id)</span>
+                    <img src="images/green_light.png" height="15" align="right">
+                    <span id="t6s5-info">(info)</span>
+                </div>
+                <div id="t6s6">
+                    <span id="t6s6-id">(user_id)</span>
+                    <img src="images/green_light.png" height="15" align="right">
+                    <span id="t6s6-info">(info)</span>
                 </div>
             </div>
         </div>
     </div>
 
+    <button onclick="showEvents()" id="refresh">view DB</button>
 
+    <script>
+
+var socket = io.connect();
+var eventsSaved = []
+
+socket.on('message', function(events){
+          console.log(JSON.stringify(events));
+	  document.getElementById('t2s5-img').src = "images/red_light.png";
+          document.getElementById('t2s5-id').innerHTML = events[0]["uid"];
+	  document.getElementById('t2s5-id').style = "font-weight:bold;";
+	  document.getElementById('t2s5-info').innerHTML = 
+		  "Time: " + String(events[0]["time"]).toHHMMSS();
+          eventSaved = events;
+});
+
+function showEvents(){
+        alert(JSON.stringify(eventSaved));
+}
+
+String.prototype.toHHMMSS = function () {
+	var sec_num = parseInt(this, 10); // don't forget the second param
+	var hours   = Math.floor(sec_num / 3600);
+	var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+	var seconds = sec_num - (hours * 3600) - (minutes * 60);
+	if (hours   < 10) {hours   = "0"+hours;}
+	if (minutes < 10) {minutes = "0"+minutes;}
+	if (seconds < 10) {seconds = "0"+seconds;}
+	return hours+':'+minutes+':'+seconds;
+}				  
+    </script>
 </body>
+</html>

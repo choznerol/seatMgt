@@ -33,16 +33,19 @@ handleError();
 
 http.createServer(function(req, res){
 	var str = myurl.parse(req.url, true).query;
+	var upload_time;
 	console.log(str.id);
 	console.log(str.status);
-	console.log(str.time);
-	
-	var data = { id: str.id, status: str.status, time:str.time};
+
+	var data = { uid: str.id, status: str.status};
 	dbconnect.query('INSERT INTO seats SET ?', data, function(err, res){
-	if(err) throw err;
-	console.log('Last insert ID:', res.insertId);
-	dbconnect.end();
+		if(err) throw err;
+		console.log('Last insert ID:', res.insertId);
 	});
+
+	dbconnect.query("UPDATE seats SET upload_time=CURRENT_TIMESTAMP() where uid=?", str.id );
+	dbconnect.end();
+
 }).listen(9489);
 
 console.log('server is runnung at port 9489');
