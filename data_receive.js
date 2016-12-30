@@ -34,17 +34,30 @@ handleError();
 http.createServer(function(req, res){
 	var str = myurl.parse(req.url, true).query;
 	var upload_time;
-	console.log(str.id);
-	console.log(str.status);
+//	console.log(str.id);
+//	console.log(str.status);
 
 	var data = { uid: str.id, status: str.status};
-	dbconnect.query('INSERT INTO seats SET ?', data, function(err, res){
+
+	dbconnect.query('select status from seats where exists (select status from seats where uid=?)', str.id, function(err, res){
+//		console.log(res);
 		if(err) throw err;
-		console.log('Last insert ID:', res.insertId);
+		if(res.length == 0){
+//			console.log("insert new users");
+			dbconnect.query('INSERT INTO seats SET ?', data, function(err, res){
+				if(err) throw err;
+				console.log('Last insert ID:', res.insertId);
+			});
+
+			dbconnect.query("UPDATE seats SET upload_time=CURRENT_TIMESTAMP() where uid=?", str.id );
+		}else{
+//			console.log("checking status...");
+//			console.log(str.status);
+			dbconnect.query("UPDATE seats SET upload_time=CURRENT_TIMESTAMP(), status=? where uid=?", [str.status, str.id] );
+		}
 	});
 
-	dbconnect.query("UPDATE seats SET upload_time=CURRENT_TIMESTAMP() where uid=?", str.id );
-	dbconnect.end();
+//	dbconnect.end();
 
 }).listen(9489);
 
