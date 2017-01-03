@@ -25,13 +25,13 @@
         <span>Temperary Leave: </span>
         <span id="blue" style="margin-right: 20px;">0</span>
 
-        <img src="images/yellow_light.png" height="25" align="middle">
-        <span>NA: </span>
-        <span id="yellow" style="margin-right: 20px;">--</span>
-
-        <img src="images/gray_light.png" height="25" align="middle">
-        <span>NA: </span>
-        <span id="gray" style="margin-right: 20px;">--</span>
+//        <img src="images/yellow_light.png" height="25" align="middle">
+//        <span>NA: </span>
+//        <span id="yellow" style="margin-right: 20px;">--</span>
+//
+//        <img src="images/gray_light.png" height="25" align="middle">
+//        <span>NA: </span>
+//        <span id="gray" style="margin-right: 20px;">--</span>
     </nav>
 
     <div class="block-row">
@@ -264,16 +264,34 @@
 
     <script>
 
+var seatID = 't2s5';
 var socket = io.connect();
-var eventsSaved = []
+var eventsSaved = [];
 
 socket.on('message', function(events){
+
           console.log(JSON.stringify(events));
-	  document.getElementById('t2s5-img').src = "images/red_light.png";
-          document.getElementById('t2s5-id').innerHTML = events[0]["uid"];
-	  document.getElementById('t2s5-id').style = "font-weight:bold;";
-	  document.getElementById('t2s5-info').innerHTML = 
-		  "Time: " + String(events[0]["time"]).toHHMMSS();
+	  document.getElementById('t2s5-id').innerHTML = events[0]["uid"];
+
+	  //temperary out
+	  if(String(events[0]["status"])=='0') {
+		  document.getElementById('t2s5-img').src = "images/blue_light.png";
+         	  document.getElementById('t2s5-id').style = "font-weight:bold;";
+		  document.getElementById('t2s5-info').innerHTML = "Reset: " + String(events[0]["time"]).toMMSS();
+
+	  //occupied
+	  }else if(String(events[0]["status"])=='1') {
+		  document.getElementById('t2s5-img').src = "images/red_light.png";
+		  document.getElementById('t2s5-info').innerHTML = "Occupied";
+
+	  //avalible
+	  }else if(String(events[0]["status"])=='-1') {
+		  document.getElementById('t2s5-img').src = "images/green_light.png";
+		  document.getElementById('t2s5-id').innerHTML = "Avalible";
+		  document.getElementById('t2s5-info').innerHTML = "</br> -";
+		  //document.getElementById('t2s5-info').innerHTML = "Prev user: "+String(events[0]["uid"]);
+	  }
+
           eventSaved = events;
 });
 
@@ -281,8 +299,8 @@ function showEvents(){
         alert(JSON.stringify(eventSaved));
 }
 
-String.prototype.toHHMMSS = function () {
-	var sec_num = parseInt(this, 10); // don't forget the second param
+String.prototype.toMMSS = function () {
+	var sec_num = 1800 - parseInt(this, 10); // don't forget the second param
 	var hours   = Math.floor(sec_num / 3600);
 	var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
 	var seconds = sec_num - (hours * 3600) - (minutes * 60);
