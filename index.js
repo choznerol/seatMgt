@@ -6,10 +6,15 @@ var dbconnect;
 var fs = require('fs');
 var express= require('express');
 var app = express();
+var server = http.createServer(app);
+var io = require('socket.io').listen(server);
 
-app.use('/img',express.static(path.join(__dirname, 'home/images')))
-app.use('/js',express.static(path.join(__dirname, 'home/javascripts')));
-app.use('/css',express.static(path.join(__dirname, 'home/stylesheets')));
+var connections = [],
+	events = [];
+
+app.use(express.static(__dirname + "/home/"));
+app.use(express.static(__dirname + "/home/stylesheets"));
+app.use(express.static(__dirname + "/home/images"));
 
 function handleError(){
 	dbconnect = mysql.createConnection({
@@ -36,64 +41,71 @@ function handleError(){
 		}
 	});
 }
+handleError();
+
+var pollingLoop = function() {
+	var query = dbconnect.query('SELECT uid, status, TIMESTAMPDIFF(SECOND,upload_time,NOW())  AS time FROM seats');
+
+	query
+		.on('error', function(err) {
+			console.log(err);
+			updateSockets(err);
+		})
+		.on('result', function(event) {
+
+			if(events.indexOf(event)===-1){
+				console.log(event);
+				events = [];
+				events.push(event);
+			}
+
+			//if(events.indexOf(event)===-1){
+			//	events.push(event);
+			//	console.log(event);
+			//}
+		});
+	console.log("db: ", events.length, "events");
+}
+
+pollingLoop();
+
+server.listen(9488);
+console.log('Server running at http://140.112.94.163:9488/');
+
+var serv_io = io.listen(server);
+
+serv_io.sockets.on('connection', function(socket){
+	connections.push(socket);
+	console.log('Connected: %s sockets connected', connections.length);
+	pollingLoop();
+	setInterval(function() {
+		
+		pollingLoop();
+		socket.emit('message', events);
+		process.stdout.write('.');
+	},1000);
+
+	// Disconnect
+	socket.on('disconnect', function(data){
+		connections.splice(connections.indexOf(socket), 1);
+		console.log('Disconnected: %s sockets connected', connections.length);
+	});
+});
+
+serv_io.sockets.on('refresh', function(){
+	console.log("refresh request");
+	for (var i=0; i<events.length; i++) {
+		console.log(events[i].id);
+	}
+});
+
+var updateSockets = function(data) {
+	data.time = new Date();
+	console.log('Pushing new data to the clients connected ( connections amount = %s ) - %s', connections.length , data.time);
+	connections.forEach(function(tmpSocket){
+		tmpSocket.volatile.emit('notification', data);
+	});
+};
 
 
-http.createServer(function (request, response) {
-	var fileName = path.basename(request.url);
-	var localFolder = __dirname + '/home/';
-	filePath = localFolder + fileName;
-	var extname = String(path.extname(filePath)).toLowerCase();
 
-	console.log('request ', request.url);
-	
-//	    var filePath = '.' + request.url;
-	    if (filePath == './')
-		        filePath = './index.html';
-	
-//	    var extname = String(path.extname(filePath)).toLowerCase();
-	    var contentType = 'text/html';
-	    var mimeTypes = {
-		            '.html': 'text/html',
-		            '.js': 'text/javascript',
-		            '.css': 'text/css',
-		            '.json': 'application/json',
-		            '.png': 'image/png',
-		            '.jpg': 'image/jpg',
-		            '.gif': 'image/gif',
-		            '.wav': 'audio/wav',
-		            '.mp4': 'video/mp4',
-		            '.woff': 'application/font-woff',
-		            '.ttf': 'application/font-ttf',
-		            '.eot': 'application/vnd.ms-fontobject',
-		            '.otf': 'application/font-otf',
-		            '.svg': 'application/image/svg+xml'
-		        };
-	
-	    contentType = mimeTypes[extname] || 'application/octect-stream';
-
-	
-	console.log('contentType: ', contentType);
-
-
-	    fs.readFile(filePath, function(error, content) {
-		            if (error) {
-				                if(error.code == 'ENOENT'){
-							                fs.readFile('./404.html', function(error, content) {
-										                    response.writeHead(200, { 'Content-Type': contentType });
-										                    response.end(content);
-										                });
-							            }
-				                else {
-							                response.writeHead(500);
-							                response.end('Sorry, check with the site admin for error: '+error.code+' ..\n');
-							                response.end();
-							            }
-				            }
-		            else {
-				                response.writeHead(200, { 'Content-Type': contentType });
-				                response.end(content, 'utf-8');
-				            }
-		        });
-	
-}).listen(9488);
-console.log('Server running at http://140.112.94.163:9488/index.html/');
